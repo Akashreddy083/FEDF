@@ -1,0 +1,44 @@
+// Add real-time validation feedback
+    Object.values(fields).forEach(field => {
+        field.element.addEventListener('input', () => {
+            if (field.validate(field.element.value)) {
+                field.error.textContent = "";
+                field.element.classList.add('valid');
+                field.element.classList.remove('invalid');
+            } else {
+                field.error.textContent = field.errorMessage;
+                field.element.classList.add('invalid');
+                field.element.classList.remove('valid');
+            }
+        });
+    });
+
+    // Handle form submission
+    document.getElementById('myForm').addEventListener('submit', function(event) {
+        event.preventDefault();
+        let allValid = true;
+
+        Object.values(fields).forEach(field => {
+            if (!field.validate(field.element.value)) {
+                field.error.textContent = field.errorMessage;
+                field.element.classList.add('invalid');
+                field.element.classList.remove('valid');
+                allValid = false;
+            }
+        });
+
+        const successMessage = document.getElementById('successMessage');
+        if (allValid) {
+            successMessage.style.display = 'block';
+            this.reset();
+            Object.values(fields).forEach(field => {
+                field.element.classList.remove('valid', 'invalid');
+            });
+        } else {
+            successMessage.style.display = 'none';
+        }
+    });
+</script>
+
+</body>
+</html>

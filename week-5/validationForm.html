@@ -1,0 +1,34 @@
+if (password.value.trim() === "") {
+            passwordError.textContent = "Password is required.";
+        } else if (password.value.length < minLength) {
+            passwordError.textContent = "Password must be at least 6 characters.";
+        } else if (!(hasUpper && hasLower && hasNumber && hasSpecial)) {
+            passwordError.textContent = "Use upper, lower, number & special char.";
+        } else {
+            passwordError.textContent = "";
+        }
+    });
+
+    // Phone Number Validation
+    phone.addEventListener('input', () => {
+        const phonePattern = /^[0-9]{10}$/;
+        if (phone.value.trim() === "") {
+            phoneError.textContent = "Phone number is required.";
+        } else if (!phonePattern.test(phone.value)) {
+            phoneError.textContent = "Phone must be exactly 10 digits.";
+        } else {
+            phoneError.textContent = "";
+        }
+    });
+
+    // Prevent form submission if errors exist
+    document.getElementById('myForm').addEventListener('submit', function(event) {
+        if (fullnameError.textContent  emailError.textContent  passwordError.textContent || phoneError.textContent) {
+            event.preventDefault();
+            alert("Please fix the errors before submitting.");
+        }
+    });
+</script>
+
+</body>
+</html>
